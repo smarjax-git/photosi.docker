@@ -1,0 +1,6 @@
+@photosi.pickuppoints_HostAddress = http://localhost:5134
+
+GET {{photosi.pickuppoints_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

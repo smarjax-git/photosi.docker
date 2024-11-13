@@ -1,0 +1,89 @@
+services:
+  
+  photosi.api:
+    container_name: photosi_api
+    build:
+      context: .
+      dockerfile: photosi.api/Dockerfile
+    ports:
+        - "5000:8080"
+    depends_on:
+      - photosi_catalog
+      - photosi_orders 
+      - photosi_users
+      - photosi_pickuppoints
+    
+  photosi_catalog:
+    container_name: photosi_catalog
+    build:
+      context: .
+      dockerfile: photosi.catalog/Dockerfile
+    ports:
+        - "5001:8080"
+    depends_on:
+      - catalog_sqlserver
+
+  photosi_orders:
+    container_name: photosi_orders
+    build:
+      context: .
+      dockerfile: photosi.orders/Dockerfile
+    ports:
+        - "5002:8080"
+    depends_on:
+      #- orders_sqlserver      
+      - catalog_sqlserver
+
+  photosi_users:
+    container_name: photosi_users
+    build:
+      context: .
+      dockerfile: photosi.users/Dockerfile
+    ports:
+        - "5003:8080"
+    depends_on:
+      #- users_sqlserver
+      - catalog_sqlserver
+            
+  photosi_pickuppoints:
+    container_name: photosi_pickuppoints
+    build:
+      context: .
+      dockerfile: photosi.pickuppoints/Dockerfile
+    ports:
+        - "5004:8080"
+    depends_on:
+        #- pickuppoints_sqlserver
+        - catalog_sqlserver
+
+  catalog_sqlserver:
+    container_name: catalog_sqlserver
+    build:
+      context: .
+      dockerfile: photosi.catalog/db.Dockerfile
+    ports:
+      - "1433:1433"
+
+#  orders_sqlserver:
+#    container_name: orders_sqlserver
+#    build:
+#      context: .
+#      dockerfile: photosi.orders/db.Dockerfile
+#    ports:
+#      - "1434:1433"
+
+#  users_sqlserver:
+#    container_name: users_sqlserver
+#    build:
+#      context: .
+#      dockerfile: photosi.users/db.Dockerfile
+#    ports:
+#      - "1435:1433"
+ 
+#  pickuppoints_sqlserver:
+#    container_name: pickuppoints_sqlserver
+#    build:
+#      context: .
+#      dockerfile: photosi.pickuppoints/db.Dockerfile
+#    ports:
+#      - "1436:1433"

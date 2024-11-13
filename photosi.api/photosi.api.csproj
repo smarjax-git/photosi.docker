@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <OpenApiReference Include="OpenAPIs\swagger.json" CodeGenerator="NSwagCSharp" Namespace="photosi.ws.users" ClassName="users_ws">
+      <SourceUri>http://localhost:5150/swagger/v1/swagger.json</SourceUri>
+		<Options>/GenerateClientInterfaces:true /GenerateExceptionClasses:false /AdditionalNamespaceUsages:photosi.ws.Exceptions</Options>
+    </OpenApiReference>
+    <OpenApiReference Include="OpenAPIs\swagger1.json" CodeGenerator="NSwagCSharp" Namespace="photosi.ws.catalog" ClassName="catalog_ws">
+      <SourceUri>http://localhost:5213/swagger/v1/swagger.json</SourceUri>
+		<Options>/GenerateClientInterfaces:true /GenerateExceptionClasses:false /AdditionalNamespaceUsages:photosi.ws.Exceptions</Options>
+    </OpenApiReference>
+    <OpenApiReference Include="OpenAPIs\swagger2.json" CodeGenerator="NSwagCSharp" Namespace="photosi.ws.orders" ClassName="orders_ws">
+      <SourceUri>http://localhost:5017/swagger/v1/swagger.json</SourceUri>
+		<Options>/GenerateClientInterfaces:true /GenerateExceptionClasses:false /AdditionalNamespaceUsages:photosi.ws.Exceptions</Options>
+    </OpenApiReference>
+    <OpenApiReference Include="OpenAPIs\swagger3.json" CodeGenerator="NSwagCSharp" Namespace="photosi.ws.pickuppoints" ClassName="pickuppoints_ws">
+      <SourceUri>http://localhost:5134/swagger/v1/swagger.json</SourceUri>
+		<Options>/GenerateClientInterfaces:true /GenerateExceptionClasses:false /AdditionalNamespaceUsages:photosi.ws.Exceptions</Options>
+    </OpenApiReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+	<PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="7.0.2">
+		<PrivateAssets>all</PrivateAssets>
+		<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	</PackageReference>
+	<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+	<PackageReference Include="NSwag.ApiDescription.Client" Version="13.18.2">
+		<PrivateAssets>all</PrivateAssets>
+		<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	</PackageReference>
+  </ItemGroup>
+
+</Project>
