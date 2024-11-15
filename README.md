@@ -1,3 +1,8 @@
+
+
+READ ReadMe.docx
+
+
 The solution is made of:
 - 1 REST API called photosi.api.
   You can interact with it through a SwaggerUI inteface.
